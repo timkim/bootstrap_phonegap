@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title></title>
+
+	<meta charset="utf-8">
+	<script type="text/javascript" charset="utf-8" src="phonegap-1.4.0.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/jQuery.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/bootstrap.js"></script>
+        
+    <script type="text/javascript">
+
+	function onBodyLoad()
+	{		
+		document.addEventListener("deviceready", onDeviceReady, false);
+	}
+	
+
+	function onDeviceReady()
+	{
+        var options = new ContactFindOptions();
+        options.multiple = true;
+        var fields = ["displayName"];
+        
+        navigator.contacts.find(fields, contactWin, contactFail, options);
+	}
+    
+    var contactFail = function(){
+        alert('Something went wrong');
+    }
+    
+
+    var contactWin = function(contacts) {
+        var myContacts = [];
+        for (var i=0; i<contacts.length; i++) {
+            myContacts.push(contacts[i].displayName);
+        }
+        updateContactList(myContacts);
+    }
+    </script>
+
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+  </head>
+  <body onload="onBodyLoad()">
+      <div class="navbar navbar-fixed-top">
+          <div class="navbar-inner">
+              <div class="container">
+                  <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                  </a>
+                  <a class="brand" href="#">Project name</a>
+                  <div class="nav-collapse">
+                      <ul class="nav">
+                          <li class="active"><a href="#">Home</a></li>
+                          <li><a href="#about">About</a></li>
+                          <li><a href="#contact">Contact</a></li>
+                      </ul>
+                  </div><!--/.nav-collapse -->
+              </div>
+          </div>
+      </div>
+      
+      <div class="container">
+          
+          <h1>Bootstrap starter template</h1>
+          <p>Use this document as a way to quick start any new project.<br> All you get is this message and a barebones HTML document.</p>
+          <div id="deviceProperties"></div>
+          
+          <a class="btn" data-toggle="modal" href="#locationModal" >Get Location in Modal</a>
+          <div id="locationModal" class="modal hide">
+              <div class="modal-header">
+                  <a class="close" data-dismiss="modal">×</a>
+                  <h3>My Location</h3>
+              </div>
+              <div class="modal-body">
+                  <div id="modalBody">Getting location...</div>
+              </div>
+          </div>
+          
+          <br \>
+          <br \>
+          <ul class="nav pills">
+            <li class="dropdown" id="contactDropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="contactDropdown">My Contacts <b class="caret"></b></a>
+                    <ul class="dropdown-menu" id="contactMenu">
+                    
+                    </ul>
+            </li>
+          </ul>
+      </div> <!-- /container -->
+      <script src="js/TwitterBookStrapPhonegapAppCode.js"></script>
+  </body>
+</html>
